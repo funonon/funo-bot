@@ -26,3 +26,4 @@ bot = MyBot(command_prefix="!", intents=intents)
 
 # Botの実行
 bot.run(TOKEN)
+
