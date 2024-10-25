@@ -1,1 +1,1 @@
-# funo-bot
+# お助けさん-Discord bot
