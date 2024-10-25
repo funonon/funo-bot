@@ -1,30 +1,21 @@
 import discord
 from discord.ext import commands
 import os
-import keep_alive  # Replitのためのファイルをインポート
+import keep_alive
 
-TOKEN = os.getenv('TOKEN')  # ReplitでTOKENをシークレットとして設定
-
-class MyBot(commands.Bot):
-    def __init__(self, command_prefix, intents):
-        super().__init__(command_prefix=command_prefix, intents=intents)
-
-    async def setup_hook(self):
-        # コグをロードする場合はここで行う
-        pass
-
-    async def on_ready(self):
-        print(f'Logged in as {self.user}')
-        await self.tree.sync()  # スラッシュコマンドの同期
-
-# インテント設定
+# インテントを設定
 intents = discord.Intents.default()
-intents.message_content = True
+intents.messages = True  # メッセージ関連のインテントを有効化
 
-# Botのインスタンスを作成
-bot = MyBot(command_prefix="!", intents=intents)
+TOKEN = os.getenv('TOKEN')
+
+bot = commands.Bot(command_prefix='!', intents=intents)  # intentsを渡す
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user}')
 
 # Botの実行
 if __name__ == "__main__":
-    keep_alive.keep_alive()  # サーバーを立てる
-    bot.run(TOKEN)
+    keep_alive.keep_alive()  # Flaskサーバーを起動
+    bot.run(TOKEN)  # Botを実行
