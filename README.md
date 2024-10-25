@@ -1,1 +1,1 @@
-# お助けさん-Discord bot
+# メインbot-Discord bot
